@@ -1,0 +1,12 @@
+{
+  "name": "ورقتي | WARQATI",
+  "short_name": "ورقتي",
+  "description": "إنشاء وتنسيق أوراق الامتحانات",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef2f7",
+  "theme_color": "#172554",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": []
+}

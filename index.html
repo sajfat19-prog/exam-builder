@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#172554">
+  <meta name="description" content="ورقتي - إنشاء وتنسيق أوراق الامتحانات">
+  <title>ورقتي | WARQATI</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">و</span><div><strong>ورقتي</strong><small>WARQATI · Exam Paper Builder</small></div></div>
+    <div class="top-actions">
+      <button id="undoBtn" title="تراجع">↶</button>
+      <button id="redoBtn" title="إعادة">↷</button>
+      <button id="printBtn" class="primary">طباعة / PDF</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel controls">
+      <h2>إعدادات الورقة</h2>
+      <label>لغة الأسئلة
+        <select id="language"><option value="ar">العربية</option><option value="en">English</option></select>
+      </label>
+      <label>عنوان الامتحان <input id="examTitle" value="الامتحان الشهري"></label>
+      <div class="two">
+        <label>الصف <input id="grade" value="الخامس الإعدادي"></label>
+        <label>المادة <input id="subject" value="اللغة الإنجليزية"></label>
+      </div>
+      <div class="two">
+        <label>الزمن <input id="duration" value="ساعة ونصف"></label>
+        <label>الدرجة <input id="total" type="number" value="100" min="1"></label>
+      </div>
+      <label>حجم الورقة
+        <select id="paperSize"><option value="A4">A4</option><option value="A3">A3</option><option value="Letter">Letter</option></select>
+      </label>
+      <label>خط الورقة
+        <select id="fontFamily">
+          <option value="Tahoma, Arial, sans-serif">Tahoma</option>
+          <option value="'Noto Naskh Arabic', serif">Noto Naskh Arabic</option>
+          <option value="Arial, sans-serif">Arial</option>
+          <option value="Georgia, serif">Georgia</option>
+          <option value="'Times New Roman', serif">Times New Roman</option>
+          <option value="'Courier New', monospace">Courier New</option>
+        </select>
+      </label>
+      <label>حجم الخط <input id="fontSize" type="number" min="10" max="24" value="14"></label>
+      <label>لون التصميم
+        <select id="theme"><option value="blue">أزرق رسمي</option><option value="black">أسود كلاسيكي</option><option value="burgundy">خمري</option><option value="purple">بنفسجي</option></select>
+      </label>
+      <div class="button-row">
+        <button id="addQuestion" class="primary">＋ إضافة سؤال</button>
+        <button id="resetBtn" class="danger">مسح الورقة</button>
+      </div>
+      <p class="hint">يُحفظ عملك تلقائياً على هذا الجهاز، ويبقى بعد تحديث الصفحة.</p>
+    </aside>
+
+    <section class="workspace">
+      <div class="workspace-head"><div><h1>معاينة ورقة الامتحان</h1><p>أضف الأسئلة ورتّب الفروع ثم اطبع الورقة أو احفظها PDF.</p></div><span class="autosave" id="saveStatus">محفوظ تلقائياً</span></div>
+      <article id="paper" class="paper">
+        <div class="paper-header">
+          <div class="school-line"><span id="schoolName">وزارة التربية</span><span id="examLabel">الامتحان الشهري</span></div>
+          <div class="paper-title" id="previewTitle">الامتحان الشهري</div>
+          <div class="meta"><span>الصف: <b id="previewGrade">الخامس الإعدادي</b></span><span>المادة: <b id="previewSubject">اللغة الإنجليزية</b></span></div>
+          <div class="meta"><span>الزمن: <b id="previewDuration">ساعة ونصف</b></span><span>الدرجة الكلية: <b id="previewTotal">100</b></span></div>
+          <div class="student-line">اسم الطالب: ........................................................................</div>
+        </div>
+        <div id="questions" class="questions"></div>
+        <footer class="paper-footer"><span>ورقتي | WARQATI</span><span>مع تمنياتنا لكم بالنجاح</span></footer>
+      </article>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
