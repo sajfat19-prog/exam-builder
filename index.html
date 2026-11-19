@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173b8f"><title>ورقتي | WARQATI</title>
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<section id="startScreen" class="start-screen">
+  <div class="start-card">
+    <div class="logo">✎</div><div class="eyebrow">WARQATI · EXAM PAPER STUDIO</div>
+    <h1>ورقتي</h1><p>أنشئ ورقة امتحانك بتنسيق احترافي</p>
+    <h3>اختر لغة الامتحان</h3>
+    <div class="language-picks"><button data-lang="ar" class="lang-card"><b>العربية</b><small>من اليمين إلى اليسار · RTL</small></button><button data-lang="en" class="lang-card"><b>English</b><small>Left to right · LTR</small></button></div>
+    <button id="openSaved" class="link-button">فتح امتحان محفوظ</button>
+  </div>
+</section>
+
+<div id="app" class="hidden">
+<header class="appbar">
+  <div class="brand"><div class="brand-icon">✎</div><div><b>ورقتي</b><small>WARQATI</small></div></div>
+  <div class="bar-tools">
+    <button id="newExam" title="عمل جديد">＋ عمل جديد</button>
+    <button id="undo" title="تراجع">↶</button><button id="redo" title="إعادة">↷</button>
+    <button id="saveExam">حفظ الامتحان</button><button id="printExam" class="print">PDF / طباعة</button>
+  </div>
+</header>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="side-heading">لوحة التحكم <span>●</span></div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="paperSettings">إعدادات الورقة</button>
+    <button class="tab" data-tab="textSettings">تنسيق النص</button>
+    <button class="tab" data-tab="headerSettings">رأس وتذييل</button>
+    <button class="tab" data-tab="questionSettings">الأسئلة</button>
+    <button class="tab" data-tab="appearance">المظهر</button>
+    <button class="tab" data-tab="savedSettings">المحفوظات</button>
+  </nav>
+  <div class="tab-content" id="paperSettings">
+    <h3>إعدادات الورقة</h3>
+    <label>حجم الورقة<select id="paperSize"><option>A4</option><option>A3</option><option>Letter</option></select></label>
+    <label>اتجاه الورقة<select id="orientation"><option value="portrait">عمودي</option><option value="landscape">أفقي</option></select></label>
+    <div class="grid2"><label>الهامش العلوي<input id="marginTop" type="number" value="15"></label><label>الهامش السفلي<input id="marginBottom" type="number" value="15"></label><label>الهامش الأيمن<input id="marginRight" type="number" value="15"></label><label>الهامش الأيسر<input id="marginLeft" type="number" value="15"></label></div>
+    <label>إطار الورقة<select id="borderStyle"><option value="double">إطار مزدوج</option><option value="solid">إطار مفرد</option><option value="none">بدون إطار</option></select></label>
+  </div>
+  <div class="tab-content hidden" id="textSettings">
+    <h3>تنسيق النص</h3>
+    <label>خط العناوين<select id="titleFont"><option value="Tahoma,Arial,sans-serif">Tahoma</option><option value="Arial,sans-serif">Arial</option><option value="'Times New Roman',serif">Times New Roman</option><option value="Georgia,serif">Georgia</option><option value="'Noto Naskh Arabic',serif">Noto Naskh Arabic</option></select></label>
+    <label>خط الأسئلة<select id="questionFont"><option value="Tahoma,Arial,sans-serif">Tahoma</option><option value="Arial,sans-serif">Arial</option><option value="'Times New Roman',serif">Times New Roman</option><option value="Georgia,serif">Georgia</option><option value="'Noto Naskh Arabic',serif">Noto Naskh Arabic</option></select></label>
+    <label>خط الفروع<select id="branchFont"><option value="Tahoma,Arial,sans-serif">Tahoma</option><option value="Arial,sans-serif">Arial</option><option value="'Times New Roman',serif">Times New Roman</option><option value="Georgia,serif">Georgia</option></select></label>
+    <div class="grid2"><label>حجم العنوان<input id="titleSize" type="number" value="20"></label><label>حجم السؤال<input id="questionSize" type="number" value="14"></label><label>حجم الفرع<input id="branchSize" type="number" value="13"></label><label>حجم الدرجة<input id="markSize" type="number" value="12"></label></div>
+    <label><input id="boldQuestions" type="checkbox" checked> جعل نص السؤال عريضاً</label>
+  </div>
+  <div class="tab-content hidden" id="headerSettings">
+    <h3>رأس وتذييل الورقة</h3>
+    <label>الجهة اليمنى<input id="headRight" value="جمهورية العراق"></label>
+    <label>الجهة الوسطى<input id="headCenter" value="بسم الله الرحمن الرحيم"></label>
+    <label>الجهة اليسرى<input id="headLeft" value="وزارة التربية"></label>
+    <label>العنوان الرئيسي<input id="examTitle" value="أسئلة الامتحان"></label>
+    <label>العام الدراسي<input id="schoolYear" value="2026 - 2027"></label>
+    <div class="grid2"><label>الصف<input id="grade" value="الخامس الإعدادي"></label><label>المادة<input id="subject" value="اللغة الإنجليزية"></label><label>التاريخ<input id="examDate" placeholder=" / / "></label><label>الدور<input id="examRole" value="الأول"></label><label>الزمن<input id="duration" value="ثلاث ساعات"></label><label>الدرجة الكلية<input id="totalMarks" value="100"></label></div>
+    <label>الملاحظة العامة<textarea id="generalNote">أجب عن جميع الأسئلة</textarea></label>
+    <label>نص التذييل<input id="footerText" value="مع تمنياتنا لكم بالنجاح"></label>
+  </div>
+  <div class="tab-content hidden" id="questionSettings">
+    <h3>إضافة سؤال</h3>
+    <label>نوع السؤال<select id="questionType"><option value="branches">سؤال بفروع</option><option value="mcq">اختيارات</option><option value="tf">صح / خطأ</option><option value="fill">أكمل الفراغ</option><option value="match">مزاوجة</option><option value="essay">مقالي</option></select></label>
+    <label>نص السؤال<textarea id="questionText" placeholder="اكتب نص السؤال هنا"></textarea></label>
+    <label>الدرجة<input id="questionMark" type="number" value="10"></label>
+    <label>مساحة الإجابة<select id="answerSpace"><option value="none">بدون</option><option value="lines">مسطرة</option><option value="dots">نقاط</option><option value="blank">فراغ أبيض</option><option value="box">إطار</option><option value="squares">مربعات</option></select></label>
+    <label>عدد أسطر الإجابة<input id="answerLines" type="number" value="2" min="0" max="20"></label>
+    <button id="addQuestion" class="full primary">＋ إضافة السؤال إلى الورقة</button>
+    <div class="tip">يمكنك تعديل نص السؤال والفروع وترتيبها من داخل المعاينة.</div>
+  </div>
+  <div class="tab-content hidden" id="appearance">
+    <h3>المظهر والثيم</h3>
+    <div class="theme-grid"><button data-theme="blue">أزرق</button><button data-theme="purple">بنفسجي</button><button data-theme="teal">تركوازي</button><button data-theme="green">أخضر</button><button data-theme="burgundy">عنابي</button><button data-theme="gold">ذهبي</button></div>
+    <label class="switch-row"><span>الوضع الليلي للواجهة</span><input id="darkMode" type="checkbox"></label>
+  </div>
+  <div class="tab-content hidden" id="savedSettings">
+    <h3>الامتحانات المحفوظة</h3><div id="savedList"></div>
+    <button id="exportExam" class="full">تصدير نسخة JSON</button><label class="file-label">استيراد امتحان<input id="importExam" type="file" accept=".json,application/json"></label>
+  </div>
+</aside>
+
+<main class="main-area">
+  <div class="preview-toolbar"><div><b>معاينة ورقة الامتحان</b><small>التعديلات تظهر مباشرة على الورقة</small></div><span id="autosave">محفوظ تلقائياً</span></div>
+  <div class="paper-stage"><article id="paper" class="exam-paper" dir="rtl">
+    <div class="double-frame">
+      <header class="exam-head">
+        <div class="head-three"><div id="pHeadRight">جمهورية العراق</div><div id="pHeadCenter">بسم الله الرحمن الرحيم</div><div id="pHeadLeft">وزارة التربية</div></div>
+        <div class="school-year" id="pYear">2026 - 2027</div>
+        <h1 id="pTitle">أسئلة الامتحان</h1>
+        <div class="exam-meta"><span>الصف: <b id="pGrade">الخامس الإعدادي</b></span><span>المادة: <b id="pSubject">اللغة الإنجليزية</b></span><span>التاريخ: <b id="pDate">/ /</b></span></div>
+        <div class="exam-meta"><span>الدور: <b id="pRole">الأول</b></span><span>الزمن: <b id="pDuration">ثلاث ساعات</b></span><span>الدرجة: <b id="pTotal">100</b></span></div>
+        <div class="general-note" id="pNote">أجب عن جميع الأسئلة</div>
+      </header>
+      <section id="questionList" class="question-list"></section>
+      <footer class="exam-footer"><span>ورقتي | WARQATI</span><span id="pFooter">مع تمنياتنا لكم بالنجاح</span></footer>
+    </div>
+  </article></div>
+</main>
+</div>
+</div>
+<script src="app.js"></script>
+</body></html>
