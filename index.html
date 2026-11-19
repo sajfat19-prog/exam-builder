@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0874a5"><title>ورقتي | استوديو أوراق الامتحان</title>
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn" id="undo" title="تراجع">↶</button><button class="iconbtn" id="redo" title="إعادة">↷</button>
+  <button class="iconbtn" id="fontQuick">Aa</button><button class="iconbtn" id="themeQuick">◉</button>
+  <button class="iconbtn" id="langQuick">◎<small>اللغة</small></button>
+  <div class="brandmark">✎</div><div class="brand">ورقتي <small>EXAM PAPER STUDIO</small></div>
+</header>
+<main class="app">
+  <section class="welcome">
+    <div><span class="eyebrow">WARQATI · EXAM PAPER STUDIO</span><h1>ورقتي</h1><p>أنشئ ورقة امتحانك بتنسيق احترافي</p></div>
+    <div class="welcome-actions"><button class="primary" id="newExam">＋ امتحان جديد</button><button class="soft" id="openFile">فتح امتحان محفوظ</button></div>
+  </section>
+
+  <section class="toolbar">
+    <button class="soft" id="undo2">↶ تراجع</button><button class="soft" id="redo2">↷ إعادة</button>
+    <button class="soft" id="save">حفظ الامتحان</button><button class="primary" id="exportPdf">PDF / طباعة</button>
+    <button class="soft" id="exportJson">تصدير JSON</button><label class="soft filelabel">استيراد امتحان<input id="importJson" type="file" accept=".json,application/json"></label>
+  </section>
+
+  <div class="workspace">
+    <section class="editor">
+      <div class="sectionhead"><div><h2>⚙ إعدادات الشكل والطباعة</h2><span class="muted">حجم الورقة · الهوامش · اتجاه الورقة</span></div><button class="collapse" data-target="paperSettings">⌄</button></div>
+      <div id="paperSettings" class="panelbody">
+        <div class="tabs"><button class="tab active" data-tab="paper">▤ الورقة</button><button class="tab" data-tab="text">T النص والدرجات</button><button class="tab" data-tab="header">▤ أعلى وأسفل</button></div>
+        <div class="tabcontent" id="tab-paper">
+          <div class="fieldgrid">
+            <label>الفاصل<select id="separator"><option>خط متصل</option><option>منقط</option><option>نجوم</option><option>مزدوج</option><option>بدون</option><option>موجي</option></select></label>
+            <label class="toggleline">الفرع الأول في سطر السؤال<input id="firstBranch" type="checkbox"></label>
+            <label>حجم الطباعة<select id="printSize"><option>صفحات متعددة</option><option>A4 كاملة</option><option>حسب المحتوى</option></select></label>
+            <label>الهوامش<select id="margins"><option>عادي</option><option>ضيق</option><option>واسع</option></select></label>
+            <label>اتجاه الورقة<select id="orientation"><option value="rtl">عربي — يمين لليسار</option><option value="ltr">إنكليزي — يسار لليمين</option><option value="ku">كردي (سوراني) — يمين لليسار</option></select></label>
+            <label>الأرقام<select id="numbers"><option value="en">إنكليزية 123</option><option value="ar">عربية ١٢٣</option></select></label>
+            <label>إطار الورقة<select id="frame"><option value="double">مزدوج</option><option value="single">مفرد</option><option value="none">بلا إطار</option></select></label>
+          </div>
+        </div>
+        <div class="tabcontent hidden" id="tab-text">
+          <div class="fieldgrid">
+            <label>خط العناوين<select id="headingFont"><option>Tahoma</option><option>Arial</option><option>Amiri</option><option>Cairo</option><option>Traditional Arabic</option><option>Times New Roman</option></select></label>
+            <label>خط الأسئلة<select id="bodyFont"><option>Tahoma</option><option>Arial</option><option>Amiri</option><option>Cairo</option><option>Traditional Arabic</option><option>Times New Roman</option></select></label>
+            <label>خط الفروع<select id="branchFont"><option>Tahoma</option><option>Arial</option><option>Amiri</option><option>Cairo</option><option>Traditional Arabic</option></select></label>
+            <label>حجم العنوان<input id="titleSize" type="number" min="12" max="32" value="20"></label>
+            <label>حجم السؤال<input id="questionSize" type="number" min="10" max="28" value="18"></label>
+            <label>حجم الفرع<input id="branchSize" type="number" min="10" max="26" value="16"></label>
+            <label>حجم الدرجة<input id="markSize" type="number" min="9" max="22" value="13"></label>
+            <label>تباعد الأسطر<input id="lineSpace" type="number" min="1" max="3" step=".1" value="1.7"></label>
+          </div>
+        </div>
+        <div class="tabcontent hidden" id="tab-header">
+          <div class="fieldgrid">
+            <label class="wide">شعار المؤسسة<input id="logoText" placeholder="اسم المؤسسة أو رابط الشعار"></label>
+            <label class="toggleline">إظهار سطر الطالب<input id="studentLine" type="checkbox" checked></label>
+            <label class="toggleline">البسملة أعلى الورقة<input id="basmala" type="checkbox" checked></label>
+            <label class="toggleline">الزمن الفارغ: سطر للكتابة باليد<input id="blankTime" type="checkbox"></label>
+            <label class="toggleline">السطر الأخير (المدرس - التقنيات - الإدارة)<input id="footerLine" type="checkbox" checked></label>
+            <label class="toggleline">توقيع الإدارة بالفوتر<input id="adminSign" type="checkbox"></label>
+            <label class="toggleline">دائرة الدرجة الكلية أسفل الورقة<input id="totalCircle" type="checkbox"></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="sectionhead"><div><h2>▣ معلومات الامتحان</h2><span class="muted" id="metaSummary">السادس الإعدادي · العربي · 2026 - 2027</span></div><button class="collapse" data-target="examInfo">⌄</button></div>
+      <div id="examInfo" class="panelbody">
+        <div class="fieldgrid">
+          <label class="wide">اسم المؤسسة<textarea id="institution" rows="2">جمهورية العراق
+وزارة التربية
+مديرية التربية</textarea></label>
+          <label class="wide">عنوان الامتحان<input id="examTitle" value="أسئلة الامتحان"></label>
+          <label>الصف / المرحلة<input id="grade" value="السادس الإعدادي"></label>
+          <label>المادة<input id="subject" value="اللغة العربية"></label>
+          <label>العام الدراسي<input id="schoolYear" value="2026 - 2027"></label>
+          <label>التاريخ<input id="examDate" type="date" value="2026-11-19"></label>
+          <label>الزمن<input id="duration" value="ساعة ونصف"></label>
+          <label>الدور (اختياري)<input id="session" value="الأول"></label>
+          <label>مدرس أو معلم المادة<input id="teacher" value=""></label>
+          <label>عضو اللجنة (اختياري)<input id="committee" placeholder="مثال: أ. حسن كاظم"></label>
+          <label class="wide">التهنئات / النص الختامي<input id="greeting" value="مع تمنياتنا لكم بالنجاح والتوفيق"></label>
+          <label class="wide">ترقيم الصفحات<input id="pageNumbering" placeholder="مثال: صفحة 1 من 2 · اقلب الورقة"></label>
+          <label class="wide">تكملة السؤال<input id="questionContinuation" placeholder="تكملة السؤال"></label>
+          <label class="wide">تكملة الفرع<input id="branchContinuation" placeholder="تكملة الفرع"></label>
+          <label class="wide">ملاحظة عامة<input id="generalNote" value="ملاحظة: الإجابة عن جميع الأسئلة إلزامية"></label>
+        </div>
+      </div>
+
+      <div class="sectionhead"><div><h2>＋ إضافة سؤال</h2><span class="muted">أنشئ الأسئلة والفروع ورتبها</span></div><span class="counter" id="count">سؤال واحد · 0 درجة</span></div>
+      <div id="questions" class="questions"></div>
+      <button class="addquestion" id="addQuestion">＋ إضافة سؤال جديد</button>
+    </section>
+
+    <aside class="previewSide">
+      <div class="previewTop"><div><h2>معاينة ورقة الامتحان</h2><span class="muted">تظهر التعديلات مباشرة على الورقة</span></div><div class="zoom"><button id="zoomOut">−</button><span id="zoomValue">75%</span><button id="zoomIn">＋</button></div></div>
+      <div class="paperViewport"><article id="paper" class="paper frame-double" dir="rtl">
+        <div class="paperHeader">
+          <div class="paperOrg" id="pOrg">جمهورية العراق<br>وزارة التربية<br>مديرية التربية</div>
+          <div class="paperCenter"><div id="pBasmala">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><strong id="pTitle">أسئلة الامتحان</strong><div id="pYear">2026 - 2027</div></div>
+          <div class="paperDetails"><div>الصف: <b id="pGrade">السادس الإعدادي</b></div><div>المادة: <b id="pSubject">اللغة العربية</b></div><div>التاريخ: <b id="pDate">2026/11/19</b></div></div>
+        </div>
+        <div class="studentLine" id="pStudent">اسم الطالب: ............................................................</div>
+        <div class="paperMeta"><span>الزمن: <b id="pDuration">ساعة ونصف</b></span><span>الدرجة الكلية: <b id="pTotal">100</b></span><span id="pSession">الدور: الأول</span></div>
+        <div class="paperNote" id="pNote">ملاحظة: الإجابة عن جميع الأسئلة إلزامية</div>
+        <div id="paperQuestions"></div>
+        <footer class="paperFooter"><span id="pTeacher">إدارة المدرسة</span><b id="pGreeting">مع تمنياتنا لكم بالنجاح والتوفيق</b><span id="pCommittee"></span></footer>
+      </article></div>
+    </aside>
+  </div>
+</main>
+
+<nav class="bottomnav"><button class="active" data-bottom="paperView">▤<span>الورقة</span></button><button data-bottom="fileView">▣<span>ملف</span></button><button data-bottom="helpView">☏<span>الدعم والشروحات</span></button></nav>
+<div class="modal hidden" id="fileModal"><div class="modalbox"><button class="close" data-close="fileModal">×</button><h2>ملف</h2><h3>الورقة</h3><button class="modalrow" id="modalPdf">📄 تصدير PDF <small>الورقة النهائية جاهزة للطباعة</small></button><button class="modalrow" id="modalPrint">▣ طباعة <small>مباشرة إلى الطابعة</small></button><button class="modalrow" id="modalShare">↗ مشاركة <small>احفظ الملف ثم أرسله</small></button><h3>امتحاناتي</h3><button class="modalrow" id="modalSave">▣ حفظ باسم <small>احفظ الامتحان باسم تختاره</small></button><button class="modalrow" id="modalOpen">⇧ فتح امتحان محفوظ <small>امتحاناتك السابقة</small></button><button class="modalrow" id="modalNew">＋ امتحان جديد <small>ابدأ ورقة فارغة</small></button></div></div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body></html>

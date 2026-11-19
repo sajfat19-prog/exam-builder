@@ -1,0 +1,9 @@
+{
+  "name": "ورقتي - استوديو أوراق الامتحان",
+  "short_name": "ورقتي",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#edf3f8",
+  "theme_color": "#0874a5",
+  "icons": []
+}
